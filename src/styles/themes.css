@@ -1,0 +1,159 @@
+/* ============================================
+   HYDRONAG THEME SYSTEM
+   Light  → Beach Ocean
+   Dark   → Ocean Blue Dusk  
+   Auto   → Deep Dark Ocean
+============================================ */
+
+:root {
+  --transition-speed: 0.3s;
+}
+
+/* ============================================
+   LIGHT THEME — Sunny Beach Ocean
+============================================ */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary: #f0f8ff;
+  --bg-secondary: #e0f2fe;
+  --bg-card: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+
+  /* Ocean Blues */
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #0284c7;
+  --color-primary-soft: #bae6fd;
+  --color-secondary: #06b6d4;
+  --color-accent: #38bdf8;
+
+  /* Sand & Foam */
+  --color-sand: #fef3c7;
+  --color-seafoam: #ecfdf5;
+  --color-coral: #fb7185;
+
+  /* Text */
+  --text-primary: #0c4a6e;
+  --text-secondary: #075985;
+  --text-muted: #7dd3fc;
+  --text-on-primary: #ffffff;
+
+  /* Water fill */
+  --water-color: #38bdf8;
+  --water-color-deep: #0ea5e9;
+  --water-wave: #7dd3fc;
+
+  /* UI */
+  --border-color: #bae6fd;
+  --shadow: 0 4px 24px rgba(14, 165, 233, 0.15);
+  --shadow-card: 0 2px 12px rgba(14, 165, 233, 0.1);
+
+  /* Streak fire */
+  --streak-color: #f97316;
+}
+
+/* ============================================
+   DARK THEME — Ocean Blue Dusk
+============================================ */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary: #0c1e2e;
+  --bg-secondary: #0f2a3d;
+  --bg-card: #13334d;
+  --bg-overlay: rgba(12, 30, 46, 0.9);
+
+  /* Ocean Blues */
+  --color-primary: #38bdf8;
+  --color-primary-hover: #7dd3fc;
+  --color-primary-soft: #0c4a6e;
+  --color-secondary: #22d3ee;
+  --color-accent: #0ea5e9;
+
+  /* Dusk tones */
+  --color-sand: #292524;
+  --color-seafoam: #134e4a;
+  --color-coral: #f43f5e;
+
+  /* Text */
+  --text-primary: #e0f2fe;
+  --text-secondary: #bae6fd;
+  --text-muted: #4a9dbf;
+  --text-on-primary: #0c1e2e;
+
+  /* Water fill */
+  --water-color: #0ea5e9;
+  --water-color-deep: #0369a1;
+  --water-wave: #075985;
+
+  /* UI */
+  --border-color: #1e4d6b;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.3);
+
+  /* Streak fire */
+  --streak-color: #fb923c;
+}
+
+/* ============================================
+   AUTO DARK — Deep Dark Ocean (system dark)
+============================================ */
+[data-theme="auto"] {
+  /* same as light by default */
+  --bg-primary: #f0f8ff;
+  --bg-secondary: #e0f2fe;
+  --bg-card: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.85);
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #0284c7;
+  --color-primary-soft: #bae6fd;
+  --color-secondary: #06b6d4;
+  --color-accent: #38bdf8;
+  --color-sand: #fef3c7;
+  --color-seafoam: #ecfdf5;
+  --color-coral: #fb7185;
+  --text-primary: #0c4a6e;
+  --text-secondary: #075985;
+  --text-muted: #7dd3fc;
+  --text-on-primary: #ffffff;
+  --water-color: #38bdf8;
+  --water-color-deep: #0ea5e9;
+  --water-wave: #7dd3fc;
+  --border-color: #bae6fd;
+  --shadow: 0 4px 24px rgba(14, 165, 233, 0.15);
+  --shadow-card: 0 2px 12px rgba(14, 165, 233, 0.1);
+  --streak-color: #f97316;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    /* Deep dark ocean — almost abyss */
+    --bg-primary: #020b14;
+    --bg-secondary: #061220;
+    --bg-card: #0a1f33;
+    --bg-overlay: rgba(2, 11, 20, 0.95);
+
+    --color-primary: #22d3ee;
+    --color-primary-hover: #67e8f9;
+    --color-primary-soft: #052e3d;
+    --color-secondary: #0ea5e9;
+    --color-accent: #06b6d4;
+
+    --color-sand: #1c1917;
+    --color-seafoam: #042f2e;
+    --color-coral: #e11d48;
+
+    --text-primary: #cffafe;
+    --text-secondary: #a5f3fc;
+    --text-muted: #2d6e7e;
+    --text-on-primary: #020b14;
+
+    --water-color: #0891b2;
+    --water-color-deep: #0e7490;
+    --water-wave: #0369a1;
+
+    --border-color: #0f3a52;
+    --shadow: 0 4px 32px rgba(0, 0, 0, 0.7);
+    --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.5);
+
+    --streak-color: #fb923c;
+  }
+}

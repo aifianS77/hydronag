@@ -1,0 +1,212 @@
+/* ============================================
+   ONBOARDING
+============================================ */
+.onboarding-logo {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.onboarding-tagline {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+}
+
+.onboarding-step-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.fact-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.disclaimer-box {
+  background: var(--color-primary-soft);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   DASHBOARD
+============================================ */
+.dashboard-logo {
+  font-size: 1.5rem;
+}
+
+.dashboard-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  transition: background var(--transition-speed);
+  line-height: 1;
+}
+
+.btn-icon:hover {
+  background: var(--bg-secondary);
+}
+
+/* ─── Streak ─────────────────────────────── */
+.streak-badge {
+  background: linear-gradient(135deg, #ff6b35, #f7c59f);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+}
+
+/* ─── Jug ────────────────────────────────── */
+.jug-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jug-svg {
+  width: 160px;
+  height: 180px;
+  filter: drop-shadow(var(--shadow-card));
+  transition: all 0.5s ease;
+}
+
+.jug-water-fill {
+  transition: y 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Glass Count ────────────────────────── */
+.glass-count {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.glass-count-current {
+  color: var(--color-primary);
+  font-size: 2.5rem;
+}
+
+.glass-count-goal {
+  color: var(--text-muted);
+}
+
+.glass-count-label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* ─── Nagger ─────────────────────────────── */
+.nagger-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg-secondary);
+  border-color: var(--color-primary-soft);
+}
+
+.nagger-emoji {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.nagger-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ─── Drink Button ───────────────────────── */
+.drink-btn {
+  font-size: 1.125rem;
+  padding: 1.1rem;
+  border-radius: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.drink-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ─── Fact Card ──────────────────────────── */
+.fact-card {
+  background: var(--color-seafoam);
+  border-color: var(--border-color);
+}
+
+.fact-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fact-card-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+}
+
+.fact-text {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.fact-nagger-take {
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+}
+
+/* ─── Modal ──────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.modal-emoji {
+  font-size: 2.5rem;
+  line-height: 1;
+}
