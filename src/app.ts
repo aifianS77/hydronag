@@ -5,6 +5,7 @@ import { Onboarding } from './components/Onboarding'
 import { Dashboard } from './components/Dashboard'
 import { initNotifications } from './utils/notifications'
 import { Settings } from './components/Settings'
+import { History } from './components/History'
 
 export class App {
   private state: AppState
@@ -54,9 +55,11 @@ export class App {
   }
 
   private renderDashboard(): void {
-    const dashboard = new Dashboard(this.state, () => {
-      this.openSettings()
-    })
+    const dashboard = new Dashboard(
+      this.state,
+      () => this.openSettings(),
+      () => this.openHistory()
+    )
     dashboard.render()
   }
 
@@ -66,5 +69,13 @@ export class App {
       this.renderDashboard()
     })
     settings.render()
+  }
+
+  private openHistory(): void {
+    const history = new History(this.state, () => {
+      this.state = loadAppState()
+      this.renderDashboard()
+    })
+    history.render()
   }
 }

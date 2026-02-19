@@ -6,11 +6,13 @@ import { getDailyFact } from '../data/facts'
 export class Dashboard {
   private state: AppState
   private onOpenSettings: () => void
+  private onOpenHistory: () => void
   private lastLoggedAt: number | null = null
 
-  constructor(state: AppState, onOpenSettings: () => void) {
+  constructor(state: AppState, onOpenSettings: () => void, onOpenHistory: () => void) {
     this.state = state
     this.onOpenSettings = onOpenSettings
+    this.onOpenHistory = onOpenHistory
   }
 
   render(): void {
@@ -37,6 +39,7 @@ export class Dashboard {
             <span class="dashboard-title">HydroNag</span>
           </div>
           <div class="flex items-center gap-1">
+            <button class="btn-icon" id="btn-history" title="Shame History">📊</button>
             <button class="btn-icon" id="btn-theme-toggle" title="Toggle theme">
               ${this.getThemeIcon()}
             </button>
@@ -217,6 +220,9 @@ export class Dashboard {
 
     document.getElementById('btn-theme-toggle')!.addEventListener('click', () => {
       this.cycleTheme()
+    })
+    document.getElementById('btn-history')!.addEventListener('click', () => {
+      this.onOpenHistory()
     })
   }
 

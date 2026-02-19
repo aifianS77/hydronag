@@ -11,6 +11,12 @@ export interface DailyLog {
   glasses: number
 }
 
+export interface HistoryEntry {
+  date: string     // YYYY-MM-DD
+  glasses: number
+  goal: number     // store goal at the time, in case user changes it later
+}
+
 export interface Streak {
   current: number
   longest: number
@@ -21,4 +27,5 @@ export interface AppState {
   settings: UserSettings
   todayLog: DailyLog
   streak: Streak
+  history: HistoryEntry[] // keep history
 }

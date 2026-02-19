@@ -1,9 +1,10 @@
-import { AppState, DailyLog, Streak, UserSettings } from '../types'
+import { AppState, DailyLog, HistoryEntry, Streak, UserSettings } from '../types'
 
 const KEYS = {
   SETTINGS: 'hydronag_settings',
   DAILY_LOG: 'hydronag_daily_log',
   STREAK: 'hydronag_streak',
+  HISTORY: 'hydronag_history',
 }
 
 // --- Defaults ---
@@ -23,7 +24,7 @@ const defaultStreak: Streak = {
 }
 
 const getTodayString = (): string => {
-  return new Date().toISOString().split('T')[0] // YYYY-MM-DD
+  return new Date().toISOString().split('T')[0]
 }
 
 const defaultDailyLog = (): DailyLog => ({
@@ -43,6 +44,37 @@ export const saveSettings = (settings: UserSettings): void => {
   localStorage.setItem(KEYS.SETTINGS, JSON.stringify(settings))
 }
 
+// --- History ---
+
+export const getHistory = (): HistoryEntry[] => {
+  const raw = localStorage.getItem(KEYS.HISTORY)
+  if (!raw) return []
+  return JSON.parse(raw)
+}
+
+export const saveHistory = (history: HistoryEntry[]): void => {
+  // keep only last 30 days
+  const trimmed = history
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 30)
+  localStorage.setItem(KEYS.HISTORY, JSON.stringify(trimmed))
+}
+
+const archiveDay = (log: DailyLog, goal: number): void => {
+  // don't archive if already in history
+  const history = getHistory()
+  const alreadyArchived = history.some(h => h.date === log.date)
+  if (alreadyArchived) return
+
+  const entry: HistoryEntry = {
+    date: log.date,
+    glasses: log.glasses,
+    goal,
+  }
+
+  saveHistory([...history, entry])
+}
+
 // --- Daily Log ---
 
 export const getTodayLog = (): DailyLog => {
@@ -51,8 +83,10 @@ export const getTodayLog = (): DailyLog => {
 
   const log: DailyLog = JSON.parse(raw)
 
-  // if stored date is not today, reset it
+  // if stored date is not today, archive it then reset
   if (log.date !== getTodayString()) {
+    const settings = getSettings()
+    archiveDay(log, settings.goal)
     const fresh = defaultDailyLog()
     saveDailyLog(fresh)
     return fresh
@@ -89,9 +123,7 @@ export const updateStreak = (goal: number): Streak => {
   const streak = getStreak()
   const today = getTodayString()
 
-  // only update streak if goal is met
   if (log.glasses < goal) return streak
-  // already updated today
   if (streak.lastLoggedDate === today) return streak
 
   const yesterday = new Date()
@@ -116,9 +148,10 @@ export const loadAppState = (): AppState => ({
   settings: getSettings(),
   todayLog: getTodayLog(),
   streak: getStreak(),
+  history: getHistory(),
 })
 
-// --- Reset (for settings page) ---
+// --- Reset ---
 
 export const resetAll = (): void => {
   Object.values(KEYS).forEach(key => localStorage.removeItem(key))
