@@ -23,9 +23,11 @@ export class History {
       <div class="container animate-fade-in">
 
         <!-- Header -->
-        <div class="flex items-center gap-2 mt-3">
-          <button class="btn-icon" id="btn-back">←</button>
-          <h2>Shame History 📊</h2>
+        <div class="page-header mt-3">
+        <button class="btn-back-btn" id="btn-back">
+            <i class="ph ph-arrow-left"></i> Back
+        </button>
+        <h2>Shame History 📊</h2>
         </div>
 
         <!-- Stats Summary -->
