@@ -2,17 +2,27 @@ import { AppState } from '../types'
 import { addGlass, getSettings, saveSettings, updateStreak } from '../utils/storage'
 import { getNaggerMessage, getGlassLogMessage } from '../utils/nagger'
 import { getDailyFact } from '../data/facts'
+import { checkMilestones } from '../utils/milestoneChecker'
+import { showMilestoneToast } from './MilestoneToast'
+import { getMilestones } from '../utils/storage'
 
 export class Dashboard {
   private state: AppState
   private onOpenSettings: () => void
   private onOpenHistory: () => void
+  private onOpenMilestones: () => void
   private lastLoggedAt: number | null = null
 
-  constructor(state: AppState, onOpenSettings: () => void, onOpenHistory: () => void) {
+  constructor(
+    state: AppState, 
+    onOpenSettings: () => void, 
+    onOpenHistory: () => void,
+    onOpenMilestones: () => void,
+) {
     this.state = state
     this.onOpenSettings = onOpenSettings
     this.onOpenHistory = onOpenHistory
+    this.onOpenMilestones = onOpenMilestones
   }
 
   render(): void {
@@ -47,6 +57,9 @@ export class Dashboard {
             </button>
             <button class="btn-icon" id="btn-settings" title="Settings">
               <i class="ph ph-gear"></i>
+            </button>
+            <button class="btn-icon" id="btn-milestones" title="Achievements">
+                <i class="ph ph-medal"></i>
             </button>
           </div>
         </div>
@@ -226,6 +239,10 @@ export class Dashboard {
     document.getElementById('btn-history')!.addEventListener('click', () => {
       this.onOpenHistory()
     })
+    document.getElementById('btn-milestones')!.addEventListener('click', () => {
+    this.onOpenMilestones()
+    })
+
   }
 
 private logGlass(): void {
@@ -309,8 +326,17 @@ private logGlass(): void {
     const updatedLog = addGlass()
     this.state.todayLog = updatedLog
     this.state.streak = updateStreak(this.state.settings.goal)
+    this.state.milestones = getMilestones()
 
-    const naggerMsg = getGlassLogMessage(updatedLog.glasses, this.state.settings.goal, this.state.settings.name)
+    // check milestones
+    const newlyUnlocked = checkMilestones(this.state)
+    this.state.milestones = getMilestones()
+
+    const naggerMsg = getGlassLogMessage(
+        updatedLog.glasses, 
+        this.state.settings.goal, 
+        this.state.settings.name
+    )
 
     this.render()
 
@@ -324,6 +350,13 @@ private logGlass(): void {
         naggerEl.classList.add('animate-pop')
       }
     }, 50)
+
+    // showss milestone toast with delay
+    newlyUnlocked.forEach((milestone, i) =>{
+        setTimeout(() =>{
+            showMilestoneToast(milestone)
+        }, 1000+i+4500)
+    })
   }
 
     private cycleTheme(): void {

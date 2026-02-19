@@ -504,3 +504,37 @@
 .btn-icon:hover .ph-fill {
   color: var(--color-primary);
 }
+
+/* ─── Name Input ─────────────────────────── */
+.name-input-wrap {
+  text-align: left;
+}
+
+.name-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color var(--transition-speed);
+  text-align: center;
+}
+
+.name-input:focus {
+  border-color: var(--color-primary);
+}
+
+.name-input::placeholder {
+  color: var(--text-muted);
+}

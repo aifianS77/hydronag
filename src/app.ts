@@ -6,6 +6,7 @@ import { Dashboard } from './components/Dashboard'
 import { initNotifications } from './utils/notifications'
 import { Settings } from './components/Settings'
 import { History } from './components/History'
+import { Milestones } from './components/Milestones'
 
 export class App {
   private state: AppState
@@ -58,7 +59,8 @@ export class App {
     const dashboard = new Dashboard(
       this.state,
       () => this.openSettings(),
-      () => this.openHistory()
+      () => this.openHistory(),
+      () => this.openMilestones()
     )
     dashboard.render()
   }
@@ -77,5 +79,13 @@ export class App {
       this.renderDashboard()
     })
     history.render()
+  }
+
+  private openMilestones(): void {
+    const milestones = new Milestones(this.state, () => {
+      this.state = loadAppState()
+      this.renderDashboard()
+    })
+    milestones.render()
   }
 }

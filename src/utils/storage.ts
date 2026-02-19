@@ -1,10 +1,12 @@
-import { AppState, DailyLog, HistoryEntry, Streak, UserSettings } from '../types'
+import { AppState, DailyLog, HistoryEntry, Milestone, Streak, UserSettings } from '../types'
+import { DEFAULT_MILESTONES } from '../data/milestone'
 
 const KEYS = {
   SETTINGS: 'hydronag_settings',
   DAILY_LOG: 'hydronag_daily_log',
   STREAK: 'hydronag_streak',
   HISTORY: 'hydronag_history',
+  MILESTONES: 'hydronag_milestones',
 }
 
 // --- Defaults ---
@@ -148,11 +150,48 @@ export const loadAppState = (): AppState => ({
   todayLog: getTodayLog(),
   streak: getStreak(),
   history: getHistory(),
-  milestones: []
+  milestones: getMilestones(),
 })
 
-// --- Reset ---
+// --- Milestones ---
+export const getMilestones = (): Milestone[] => {
+  const raw = localStorage.getItem(KEYS.MILESTONES)
+  if (!raw) return DEFAULT_MILESTONES.map(m => ({ ...m }))
 
+  const stored: Milestone[] = JSON.parse(raw)
+
+  // merge in case new milestones were added in updates
+  return DEFAULT_MILESTONES.map(def => {
+    const found = stored.find(s => s.id === def.id)
+    return found ? { ...def, unlockedAt: found.unlockedAt } : def
+  })
+}
+
+export const saveMilestones = (milestones: Milestone[]): void => {
+  localStorage.setItem(KEYS.MILESTONES, JSON.stringify(milestones))
+}
+
+export const unlockMilestone = (id: string): Milestone | null => {
+  const milestones = getMilestones()
+  const index = milestones.findIndex(m => m.id === id)
+  if (index === -1) return null
+
+  // already unlocked
+  if (milestones[index].unlockedAt) return null
+
+  milestones[index].unlockedAt = new Date().toISOString()
+  saveMilestones(milestones)
+  return milestones[index]
+}
+
+export const getTotalGlasses = (): number => {
+  const history = getHistory()
+  const todayLog = getTodayLog()
+  const historyTotal = history.reduce((sum, h) => sum + h.glasses, 0)
+  return historyTotal + todayLog.glasses
+}
+
+// --- Reset ---
 export const resetAll = (): void => {
   Object.values(KEYS).forEach(key => localStorage.removeItem(key))
 }
