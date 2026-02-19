@@ -24,10 +24,10 @@ export class History {
 
         <!-- Header -->
         <div class="page-header mt-3">
-        <button class="btn-back-btn" id="btn-back">
-            <i class="ph ph-arrow-left"></i> Back
-        </button>
-        <h2>Shame History 📊</h2>
+            <button class="btn-back-btn" id="btn-back">
+                <i class="ph ph-arrow-left"></i> Back
+            </button>
+            <h2>Shame History 📊</h2>
         </div>
 
         <!-- Stats Summary -->

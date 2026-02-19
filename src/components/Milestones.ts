@@ -25,7 +25,9 @@ export class Milestones {
 
         <!-- Header -->
         <div class="flex items-center gap-2 mt-3">
-          <button class="btn-icon" id="btn-back">←</button>
+            <button class="btn-back-btn" id="btn-back">
+                <i class="ph ph-arrow-left"></i> Back
+            </button>
           <h2>Achievements 🏅</h2>
         </div>
 
