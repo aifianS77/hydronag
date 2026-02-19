@@ -21,7 +21,24 @@ const getRandomMessage = () => {
 // ─── Install ──────────────────────────────────────────────────────
 self.addEventListener('install', (event) => {
   console.log('[HydroNag SW] Installed')
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll([
+        '/hydronag/',
+        '/hydronag/index.html',
+      ])
+    })
+  )
   self.skipWaiting()
+})
+
+// serve from cache when offline
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request)
+    })
+  )
 })
 
 // ─── Activate ─────────────────────────────────────────────────────
