@@ -36,20 +36,33 @@ export class Onboarding {
 
 
   // ─── Step 1 — The Welcome ───────────────────────────────────────
-  private getStep1(): string {
-    return `
-      <div class="card mt-4 text-center animate-fade-in" id="step-1">
-        <p class="onboarding-step-text">
-          We're going to make sure you drink water today.
-          <br/><br/>
-          <span class="text-muted">Whether you like it or not.</span>
-        </p>
-        <button class="btn btn-primary btn-lg w-full mt-3" id="btn-step1">
-          Fine. Let's do this.
-        </button>
-      </div>
-    `
-  }
+    private getStep1(): string {
+        return `
+        <div class="card mt-4 text-center animate-fade-in" id="step-1">
+            <p class="onboarding-step-text">
+            We're going to make sure you drink water today.
+            <br/>
+            <span class="text-muted">Whether you like it or not.</span>
+            </p>
+            <div class="name-input-wrap mt-3">
+            <label class="name-label">What should I call you?</label>
+            <input
+                type="text"
+                id="input-name"
+                class="name-input"
+                placeholder="Your name (optional)"
+                maxlength="20"
+            />
+            <p class="text-muted mt-1" style="font-size:0.8rem">
+                Leave blank if you prefer to remain anonymous and dehydrated.
+            </p>
+            </div>
+            <button class="btn btn-primary btn-lg w-full mt-3" id="btn-step1">
+            Fine. Let's do this.
+            </button>
+        </div>
+        `
+    }
 
   // ─── Step 2 — The Myth Disclaimer ──────────────────────────────
   private getStep2(): string {
@@ -127,6 +140,10 @@ export class Onboarding {
 
   private attachStep1Events(): void {
     document.getElementById('btn-step1')!.addEventListener('click', () => {
+      const nameInput = document.getElementById('input-name') as HTMLInputElement
+      const name = nameInput.value.trim()
+      const settings = getSettings()
+      saveSettings({ ...settings, name })
       this.goToStep(2)
     })
   }

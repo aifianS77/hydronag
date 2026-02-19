@@ -1,4 +1,5 @@
 export interface UserSettings {
+  name: string
   goal: number              // daily glass goal, default 8
   theme: 'light' | 'dark' | 'auto'
   notificationsEnabled: boolean
@@ -23,9 +24,18 @@ export interface Streak {
   lastLoggedDate: string    // YYYY-MM-DD format
 }
 
+export interface Milestone {
+  id: string
+  emoji: string
+  title: string
+  description: string
+  unlockedAt: string | null   // ISO date string, null if not yet unlocked
+}
+
 export interface AppState {
   settings: UserSettings
   todayLog: DailyLog
   streak: Streak
   history: HistoryEntry[] // keep history
+  milestones: Milestone[] // keep milestone 
 }

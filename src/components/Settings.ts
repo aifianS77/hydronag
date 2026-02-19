@@ -203,6 +203,8 @@ export class Settings {
   }
 
   private async save(): Promise<void> {
+    const nameInput = document.getElementById('input-name') as HTMLInputElement
+    this.settings.name = nameInput.value.trim()
     saveSettings(this.settings)
 
     // reinit notifications with new settings

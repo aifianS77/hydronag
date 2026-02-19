@@ -35,16 +35,18 @@ export class Dashboard {
         <!-- Header -->
         <div class="flex items-center justify-between mt-3">
           <div class="flex items-center gap-1">
-            <span class="dashboard-logo">💧</span>
+            <i class="ph-fill ph-drop dashboard-logo-icon"></i>
             <span class="dashboard-title">HydroNag</span>
           </div>
           <div class="flex items-center gap-1">
-            <button class="btn-icon" id="btn-history" title="Shame History">📊</button>
+            <button class="btn-icon" id="btn-history" title="Shame History">
+                <i class="ph ph-chart-bar"></i>
+            </button>
             <button class="btn-icon" id="btn-theme-toggle" title="Toggle theme">
               ${this.getThemeIcon()}
             </button>
             <button class="btn-icon" id="btn-settings" title="Settings">
-              ⚙️
+              <i class="ph ph-gear"></i>
             </button>
           </div>
         </div>
@@ -95,7 +97,7 @@ export class Dashboard {
           id="btn-drink"
           ${glasses >= goal ? 'disabled' : ''}
         >
-          💧 I drank a glass
+          <i class="ph-fill ph-drop"></i> I drank a glass
         </button>
 
         ${glasses >= goal ? `
@@ -120,8 +122,8 @@ export class Dashboard {
 
   private getThemeIcon(): string {
     const { theme } = this.state.settings
-    if (theme === 'light') return '🌙'
-    if (theme === 'dark') return '☀️'
+    if (theme === 'light') return '<i class="ph ph-moon"></i>'
+    if (theme === 'dark') return '<i class="ph ph-sun"></i>'
     return '🌗'
   }
 
@@ -308,7 +310,7 @@ private logGlass(): void {
     this.state.todayLog = updatedLog
     this.state.streak = updateStreak(this.state.settings.goal)
 
-    const naggerMsg = getGlassLogMessage(updatedLog.glasses, this.state.settings.goal)
+    const naggerMsg = getGlassLogMessage(updatedLog.glasses, this.state.settings.goal, this.state.settings.name)
 
     this.render()
 

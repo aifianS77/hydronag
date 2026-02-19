@@ -484,3 +484,23 @@
   line-height: 1;
   flex-shrink: 0;
 }
+
+/* ─── Phosphor Icons ─────────────────────── */
+.dashboard-logo-icon {
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.btn-icon .ph,
+.btn-icon .ph-fill {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.btn-icon:hover .ph,
+.btn-icon:hover .ph-fill {
+  color: var(--color-primary);
+}

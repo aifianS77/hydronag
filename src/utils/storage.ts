@@ -8,8 +8,8 @@ const KEYS = {
 }
 
 // --- Defaults ---
-
 const defaultSettings: UserSettings = {
+  name: '',
   goal: 8,
   theme: 'auto',
   notificationsEnabled: false,
@@ -143,12 +143,12 @@ export const updateStreak = (goal: number): Streak => {
 }
 
 // --- Full State ---
-
 export const loadAppState = (): AppState => ({
   settings: getSettings(),
   todayLog: getTodayLog(),
   streak: getStreak(),
   history: getHistory(),
+  milestones: []
 })
 
 // --- Reset ---
