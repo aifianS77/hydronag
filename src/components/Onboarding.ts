@@ -1,5 +1,5 @@
 import { getSettings, saveSettings } from '../utils/storage'
-import { UserSettings } from '../types'
+import { requestNotificationPermission, scheduleNotifications } from '../utils/notifications'
 
 export class Onboarding {
   private onComplete: () => void
@@ -33,6 +33,7 @@ export class Onboarding {
       </div>
     `
   }
+
 
   // ─── Step 1 — The Welcome ───────────────────────────────────────
   private getStep1(): string {
@@ -174,19 +175,23 @@ export class Onboarding {
   }
 
   private async requestNotifications(enable: boolean): Promise<void> {
-    if (!enable || !('Notification' in window)) return
+    if (!enable) return
 
-    const permission = await Notification.requestPermission()
+    const granted = await requestNotificationPermission()
     const settings = getSettings()
     saveSettings({
-      ...settings,
-      notificationsEnabled: permission === 'granted',
+     ...settings,
+     notificationsEnabled: granted,   
     })
-  }
 
-  private finish(): void {
+    if (granted){
+        await scheduleNotifications(settings.notificationTimes)
+    }
+  }
+  private finish():void{
     const settings = getSettings()
-    saveSettings({ ...settings, onboardingComplete: true } as UserSettings)
+    saveSettings({...settings,onboardingComplete:true})
     this.onComplete()
   }
+
 }

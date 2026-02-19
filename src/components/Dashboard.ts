@@ -1,5 +1,5 @@
 import { AppState } from '../types'
-import { addGlass, getSettings, loadAppState, saveSettings, updateStreak } from '../utils/storage'
+import { addGlass, getSettings, saveSettings, updateStreak } from '../utils/storage'
 import { getNaggerMessage, getGlassLogMessage } from '../utils/nagger'
 import { getDailyFact } from '../data/facts'
 

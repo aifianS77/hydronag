@@ -1,0 +1,25 @@
+{
+  "name": "HydroNag",
+  "short_name": "HydroNag",
+  "description": "Your unsolicited hydration assistant.",
+  "start_url": "/hydronag/",
+  "scope": "/hydronag/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0f8ff",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/hydronag/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/hydronag/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

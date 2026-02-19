@@ -210,3 +210,151 @@
   font-size: 2.5rem;
   line-height: 1;
 }
+
+/* ─── Settings ───────────────────────────── */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.settings-stepper {
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.settings-goal-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  min-width: 3rem;
+  text-align: center;
+}
+
+.settings-theme-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.settings-theme-btn {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.875rem;
+  border: 2px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.settings-theme-btn.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* ─── Toggle Switch ──────────────────────── */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: var(--border-color);
+  border-radius: 9999px;
+  transition: var(--transition-speed);
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  border-radius: 50%;
+  transition: var(--transition-speed);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--color-primary);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+
+/* ─── Notification Times ─────────────────── */
+.notification-time-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.time-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition-speed);
+}
+
+.time-input:focus {
+  border-color: var(--color-primary);
+}
+
+/* ─── Danger Zone ────────────────────────── */
+.danger-zone {
+  border-color: #fca5a5;
+  background: #fff1f2;
+}
+
+[data-theme="dark"] .danger-zone,
+[data-theme="auto"] .danger-zone {
+  border-color: #7f1d1d;
+  background: #1c0a0a;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}

@@ -1,8 +1,10 @@
 import './styles/main.css'
-import { loadAppState, getSettings, saveSettings } from './utils/storage'
+import { loadAppState } from './utils/storage'
 import { AppState } from './types'
 import { Onboarding } from './components/Onboarding'
 import { Dashboard } from './components/Dashboard'
+import { initNotifications } from './utils/notifications'
+import { Settings } from './components/Settings'
 
 export class App {
   private state: AppState
@@ -14,7 +16,13 @@ export class App {
   init(): void {
     this.applyTheme()
     this.watchSystemTheme()
+    this.initNotifications() 
     this.render()
+  }
+
+  private async initNotifications(): Promise<void> {
+    const { notificationsEnabled, notificationTimes } = this.state.settings
+    await initNotifications(notificationsEnabled, notificationTimes)
   }
 
   private applyTheme(): void {
@@ -53,16 +61,10 @@ export class App {
   }
 
   private openSettings(): void {
-    const app = document.getElementById('app')!
-    app.innerHTML = `
-      <div class="container animate-fade-in">
-        <h2 class="text-center mt-4">Settings coming soon ⚙️</h2>
-        <button class="btn btn-ghost w-full mt-3" id="btn-back">← Back</button>
-      </div>
-    `
-    document.getElementById('btn-back')!.addEventListener('click', () => {
+    const settings = new Settings(() =>{
       this.state = loadAppState()
       this.renderDashboard()
     })
+    settings.render()
   }
 }
