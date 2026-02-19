@@ -408,7 +408,7 @@
 
         <!-- Header -->
         <div class="flex items-center gap-2 mt-3">
-          <i class="ph ph-arrow-left"></i> Back
+          <button class="btn-icon" id="btn-back">←</button>
           <h2>Shame History 📊</h2>
         </div>
 
