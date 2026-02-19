@@ -295,7 +295,9 @@
 
         <!-- Header -->
         <div class="flex items-center gap-2 mt-3">
-          <button class="btn-icon" id="btn-back">←</button>
+            <button class="btn-back-btn" id="btn-back">
+                <i class="ph ph-arrow-left"></i> Back
+            </button>
           <h2>Settings</h2>
         </div>
 
@@ -408,10 +410,10 @@
 
         <!-- Header -->
         <div class="page-header mt-3">
-        <button class="btn-back-btn" id="btn-back">
-            <i class="ph ph-arrow-left"></i> Back
-        </button>
-        <h2>Shame History 📊</h2>
+            <button class="btn-back-btn" id="btn-back">
+                <i class="ph ph-arrow-left"></i> Back
+            </button>
+            <h2>Shame History 📊</h2>
         </div>
 
         <!-- Stats Summary -->
@@ -500,7 +502,9 @@
 
         <!-- Header -->
         <div class="flex items-center gap-2 mt-3">
-          <button class="btn-icon" id="btn-back">←</button>
+            <button class="btn-back-btn" id="btn-back">
+                <i class="ph ph-arrow-left"></i> Back
+            </button>
           <h2>Achievements 🏅</h2>
         </div>
 
