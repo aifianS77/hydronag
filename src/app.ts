@@ -18,7 +18,8 @@ export class App {
   init(): void {
     this.applyTheme()
     this.watchSystemTheme()
-    this.initNotifications() 
+    this.initNotifications()
+    this.watchBrowserHistory()
     this.render()
   }
 
@@ -41,8 +42,42 @@ export class App {
     })
   }
 
+  // ─── Browser History API ──────────────────────────────────────
+  private watchBrowserHistory(): void {
+    window.addEventListener('popstate', (event) => {
+      const screen = event.state?.screen ?? 'dashboard'
+      this.state = loadAppState()
+
+      switch (screen) {
+        case 'settings':
+          this.openSettings(false)
+          break
+        case 'history':
+          this.openHistory(false)
+          break
+        case 'milestones':
+          this.openMilestones(false)
+          break
+        default:
+          this.renderDashboard(false)
+          break
+      }
+    })
+  }
+
+  private pushState(screen: string): void {
+    window.history.pushState(
+      { screen },
+      '',
+      `/hydronag/#${screen}`
+    )
+  }
+
   private render(): void {
     const { onboardingComplete } = this.state.settings
+
+    // set initial history state
+    window.history.replaceState({ screen: 'dashboard' }, '', '/hydronag/')
 
     if (!onboardingComplete) {
       const onboarding = new Onboarding(() => {
@@ -55,7 +90,8 @@ export class App {
     }
   }
 
-  private renderDashboard(): void {
+  private renderDashboard(push: boolean = true): void {
+    if (push) this.pushState('dashboard')
     const dashboard = new Dashboard(
       this.state,
       () => this.openSettings(),
@@ -65,15 +101,17 @@ export class App {
     dashboard.render()
   }
 
-  private openSettings(): void {
-    const settings = new Settings(() =>{
+  private openSettings(push: boolean = true): void {
+    if (push) this.pushState('settings')
+    const settings = new Settings(() => {
       this.state = loadAppState()
       this.renderDashboard()
     })
     settings.render()
   }
 
-  private openHistory(): void {
+  private openHistory(push: boolean = true): void {
+    if (push) this.pushState('history')
     const history = new History(this.state, () => {
       this.state = loadAppState()
       this.renderDashboard()
@@ -81,7 +119,8 @@ export class App {
     history.render()
   }
 
-  private openMilestones(): void {
+  private openMilestones(push: boolean = true): void {
+    if (push) this.pushState('milestones')
     const milestones = new Milestones(this.state, () => {
       this.state = loadAppState()
       this.renderDashboard()

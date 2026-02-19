@@ -682,20 +682,36 @@
 .btn-back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--border-color);
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--border-color);
   background: var(--bg-card);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-speed);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-back-btn i {
+  font-size: 1rem;
+  transition: transform var(--transition-speed);
 }
 
 .btn-back-btn:hover {
-  background: var(--bg-secondary);
+  background: var(--color-primary);
   border-color: var(--color-primary);
-  color: var(--color-primary);
+  color: var(--text-on-primary);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.btn-back-btn:hover i {
+  transform: translateX(-3px);
+}
+
+.btn-back-btn:active {
+  transform: translateY(0);
 }
